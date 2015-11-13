@@ -1,0 +1,7 @@
+##只要有flask就完事了。
+
+    python app.py
+
++ /index/ 电话本页面
++ /login/ 登陆页面
++ /add/   添加联系人页面
