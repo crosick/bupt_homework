@@ -6,11 +6,12 @@
 #define BUFFER_SIZE 5
 
 typedef int buffer_item;
+typedef int buffer_idx;
 typedef struct {
     buffer_item buf[BUFFER_SIZE];
     size_t len;
-    buffer_item* head;
-    buffer_item* end;
+    buffer_idx head;
+    buffer_idx end;
 } buffer_t;
 
 extern buffer_t buffer;
