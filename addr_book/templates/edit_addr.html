@@ -203,7 +203,7 @@ $(document).ready(function($) {
     Toast.init();
 
     //除了名字这个页面没啥好验证的。。。
-
+    
     $('#btn-toast').click(function() {
         var name = $('#new-name').val();
         if (name == "") {
@@ -226,36 +226,28 @@ $(document).ready(function($) {
         <div class="add">
             <div class="add-screen">
                 <div class="add-form">
-                    <form method="POST" action="/">
-                        <h1 class="form-title">新建联系人：</h1>
-                        <div class="control-group">
-                            <label class="username-label desc" for="add-name">name:</label>
-                            <!-- <input type="text" class="add-field" value="" placeholder="name" id="add-name"> -->
-                            {{ form.name(class="add-field", placeholder="name", id="new-name") }}
-                        </div>
-                        <div class="control-group">
-                            <label class="add-field-icon fui-lock" for="add-pass">phone:</label>
-                            <!-- <input type="password" class="add-field" value="" placeholder="phone" id="add-pass"> -->
-                            {{ form.phone(class="add-field", placeholder="phone", id="new-phone") }}
-                        </div>
-                        <div class="control-group">
-                            <label class="username-label desc" for="add-name">email:</label>
-                            <!-- <input type="text" class="add-field" value="" placeholder="email" id="add-name"> -->
-                            {{ form.email(class="add-field", placeholder="email", id="new-email") }}
-                        </div>
-                        <div class="control-group">
-                            <label class="add-field-icon fui-lock" for="add-pass">QQ:</label>
-                            <!-- <input type="password" class="add-field" value="" placeholder="QQ number" id="add-pass"> -->
-                            {{ form.qq(class="add-field", placeholder="qq", id="new-qq") }}
-                        </div>
-                        <div class="control-group">
-                            <label class="username-label desc" for="add-name">address:</label>
-                            <!-- <input type="text" class="add-field" value="" placeholder="address" id="add-name"> -->
-                            {{ form.address(class="add-field", placeholder="address", id="new-address") }}
-                        </div>
-                        <div class="btn" id="btn-toast" href="#">Add a new contact</div>
-                        <!-- {{ form.submit(class="btn", **{'id':'btn-toast'})}} -->
-                    </form>
+                    <h1 class="form-title">新建联系人：</h1>
+                    <div class="control-group">
+                        <label class="username-label desc" for="add-name">name:</label>
+                        <input type="text" class="add-field" value="" placeholder="name" id="new-name">
+                    </div>
+                    <div class="control-group">
+                        <label class="add-field-icon fui-lock" for="add-pass">phone:</label>
+                        <input type="password" class="add-field" value="" placeholder="phone" id="add-pass">
+                    </div>
+                    <div class="control-group">
+                        <label class="username-label desc" for="add-name">email:</label>
+                        <input type="text" class="add-field" value="" placeholder="email" id="add-name">
+                    </div>
+                    <div class="control-group">
+                        <label class="add-field-icon fui-lock" for="add-pass">QQ:</label>
+                        <input type="password" class="add-field" value="" placeholder="QQ number" id="add-pass">
+                    </div>
+                    <div class="control-group">
+                        <label class="username-label desc" for="add-name">address:</label>
+                        <input type="text" class="add-field" value="" placeholder="address" id="add-name">
+                    </div>
+                    <div class="btn" id="btn-toast" href="#">Add a new contact</div>
                 </div>
             </div>
         </div>

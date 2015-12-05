@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.js"></script>
+{% extends "base.html" %}
+
+{% block css %}
 <style>
 body {
-    background-image: url("image/fractal.png");
+    background-image: url("/image/fractal.png");
     margin: 0px;
     font-family: arial, 'Microsoft Yahei', '微软雅黑', sans-serif;
 }
@@ -139,6 +139,10 @@ input:focus {
     margin-top: 12px;
 }
 </style>
+{% endblock %}
+
+
+{% block js %}
 <script>
 $(document).ready(function($) {
     var Toast = {
@@ -240,13 +244,10 @@ $(document).ready(function($) {
 
 });
 </script>
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>ekCit的超烂登陆界面</title>
-</head>
 
-<body>
+{% block body %}
     <div class="container">
         <div class="login">
             <div class="login-screen">
@@ -267,6 +268,4 @@ $(document).ready(function($) {
             </div>
         </div>
     </div>
-</body>
-
-</html>
+{% endblock %}
