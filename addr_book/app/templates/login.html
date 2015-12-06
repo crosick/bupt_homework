@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% block css %}
+<style>
+
+*:focus {
+    outline: none;
+}
+
+.control-group {
+    margin-bottom: 12px;
+}
+
+
+.login {
+    /*width: 320px;*/
+    width: 100%;
+    position: absolute;
+    top: 42%;
+    transform: translateY(-50%);
+}
+
+.login-header {
+    margin: 30px 0px 30px 0px;
+    padding-bottom: 15px;
+}
+
+.avatar:before {
+    content: "\2B22";
+    background: url('http://7xkyok.com1.z0.glb.clouddn.com/123.jpg?imageView2/1/w/180/h/180');
+    background-size: initial;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 7px #DD1D12;
+    font-size: 11.5rem;
+    line-height: 1;
+    background-position: center bottom;
+}
+
+.login-screen {
+    background-color: rgba(255, 255, 255, 0);
+    padding: 0px 0px 50px 0px;
+}
+
+.login-form {
+    text-align: center;
+    margin: 0 auto;
+    min-width: 300px;
+    max-width: 300px;
+}
+
+.control-group {
+    margin-bottom: 10px;
+}
+
+input {
+    text-align: center;
+    background-color: white;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 200;
+    color: #DD1D12;
+    padding: 10px 0;
+    width: 100%;
+    transition: border .5s;
+}
+
+</style>
+{% endblock %}
+
+
+{% block js %}
+<script>
+$(document).ready(function($) {
+    
+    var toast = new Toast();
+
+    toast.init();
+
+    //todo: add regex
+
+    function usernameIsValid(username) {
+        return /^[0-9a-zA-Z_.-]{4,12}$/.test(username);
+    }
+
+    function passwordIsValid(password) {
+        return /^(?=.*?[a-zA-Z])(?=.*?\d).{6,}$/.test(password);
+    }
+
+    var failset = [false, false, false, false]
+        // 用户名未填，用户名不符合要求，密码未填，密码不符合要求
+
+    var toastset = ["请输入用户名:D",
+                    "用户名需大于5个字符，小于13个字符",
+                    "请输入密码XD",
+                    "密码需要大于5个字符，必须包含数字与字母"]
+
+    $('#btn-toast').click(function() {
+        // var username = $('#login-name').val();
+        // var password = $('#login-pass').val();
+        var username = document.getElementById("login-name").value;
+        var password = document.getElementById("login-pass").value;
+
+        var pass = true;
+
+
+        if (username == "") {
+            failset[0] = true;
+        }
+
+        if (usernameIsValid(username) == false) {
+            failset[1] = true;
+        }
+
+        if (password == "") {
+            failset[2] = true;
+        }
+
+        if (passwordIsValid(password) == false) {
+            failset[3] = true;
+        }
+
+        for (var i = 0; i < failset.length; i++) {
+            if (failset[i] == true) {
+                toast.show(toastset[i]);
+                pass = false;
+                break;
+            };
+        };
+
+
+        if (pass) {
+            console.log('haha');
+            document.login_form.submit();
+        };
+
+        failset = [false, false, false, false];
+    });
+
+});
+</script>
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    <div class="login">
+        <div class="login-screen form-screen">
+            <div class="login-form">
+                <div class="login-header">
+                    <div class="avatar_box"><span class="avatar"></span></div>
+                </div>
+                <form method="POST" name="login_form" action="/login">
+                {{ form.csrf_token }}
+                <div class="control-group">
+                    <!-- <input type="text" class="login-field" value="" placeholder="username" id="login-name"> -->
+                    {{ form.username(class="login-field", placeholder="username", id="login-name") }}
+                    <label class="login-field-icon fui-user" for="login-name"></label>
+                </div>
+                <div class="control-group">
+                    <!-- <input type="password" class="login-field" value="" placeholder="password" id="login-pass"> -->
+                    {{ form.password(type="password", class="login-field", placeholder="password", id="login-pass") }}
+                    <label class="login-field-icon fui-lock" for="login-pass"></label>
+                </div>
+                <div class="btn" id="btn-toast" href="#">login</div>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class=flashes>
+                        {% for message in messages %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                        <li>Username: admin</li>
+                        <li>Password: admin123</li>
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

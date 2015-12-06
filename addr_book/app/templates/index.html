@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block js %}
+<script>
+
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+
+
+$(document).ready(function() {
+        
+});
+
+</script>
+{% endblock %}
+
+
+{% block css %}
+<style>
+
+
+h1 {
+    font-size: 30px;
+    color: #dd1d12;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+
+
+p{
+    color: #dd1d12;
+    text-align: center;
+}
+
+.addr-book {
+    width: 1100px;
+    
+    padding: 60px 120px 0px 120px;
+    margin: 0 auto;
+}
+
+
+/* for custom scrollbar for webkit browser*/
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+
+</style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="addr-book">
+            <h1>EKCIT的反人类电话本</h1>
+            <p>因为太反人类了，所以还是 <a style="color:#202E48;font-size:18px;" href="{{ url_for('logout') }}">登出</a> 吧</p>
+            <div class="tbl-header">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <thead>
+                        <tr>
+                            <th class="name">姓名</th>
+                            <th class="phone">电话</th>
+                            <th class="email">邮箱</th>
+                            <th class="qq">QQ号</th>
+                            <th class="address">地址</th>
+                            <th class="operation"><a href=" {{ url_for('add_addr') }} "> + 新建联系人</a><a href=" {{ url_for('add_addr') }} "></a></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                        {% for record in records %}
+                        <tr>
+                            <td class="name">{{ record.name }}</td>
+                            <td class="phone">{{ record.phone }}</td>
+                            <td class="email">{{ record.email }}</td>
+                            <td class="qq">{{ record.qq }}</td>
+                            <td class="address">{{ record.address }}</td>
+                            <td class="operation"><a href="/edit/{{ record.id }}"><i class="icon iconfont edit">&#xf0011;</i></a>&nbsp;&nbsp;&nbsp;<a href="/delete/{{ record.id }}"><i class="icon iconfont delete">&#xe601;</i></a>&nbsp;&nbsp;&nbsp;</td>
+                        </tr>
+                        {% endfor %}                   
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

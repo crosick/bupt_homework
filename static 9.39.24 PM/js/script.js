@@ -1,4 +1,3 @@
-
 function Toast() {
     this.isInited=false;
     this.elem=null;

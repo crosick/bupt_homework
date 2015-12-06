@@ -10,14 +10,6 @@ a {
   color: white
 }
 
-.operation a:link {
-    text-decoration: none;
-}
-
-.operation a:hover {
-    font-weight: 200px
-}
-
 .container {
     position: relative;
     height: 100vh;

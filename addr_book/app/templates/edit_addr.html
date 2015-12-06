@@ -1,0 +1,140 @@
+{% extends "base.html" %} {% block css %}
+<style>
+label {
+    color: white;
+    text-align: left;
+}
+
+*:focus {
+    outline: none;
+}
+
+h1 {
+    font-weight: 100;
+}
+
+.form-title {
+    color: white;
+    text-align: left;
+}
+
+.control-group {
+    margin-bottom: 12px;
+    clear: both;
+    overflow: hidden
+}
+
+.add {
+    /*width: 320px;*/
+    width: 100%;
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+}
+
+.add-header {
+    margin: 30px 0px 30px 0px;
+    padding-bottom: 15px;
+}
+
+.add-screen {
+    background-color: rgba(255, 255, 255, 0);
+    padding: 0px 0px 50px 0px;
+}
+
+.add-form {
+    text-align: center;
+    margin: 0 auto;
+    min-width: 500px;
+    max-width: 500px;
+}
+
+.control-group {
+    margin-bottom: 12px;
+    clear: both;
+}
+
+label {
+    width: 12px;
+    float: left;
+    text-align: right;
+    padding-right: 10px;
+}
+
+input {
+    text-align: center;
+    float: right;
+    background-color: white;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 200;
+    color: #DD1D12;
+    padding: 10px 0;
+    width: 75%;
+    transition: border .5s;
+}
+</style>
+{% endblock %} {% block js %}
+<script>
+$(document).ready(function($) {
+
+    var toast = new Toast();
+
+    toast.init();
+
+    //除了名字这个页面没啥好验证的。。。
+
+    $('#btn-toast').click(function() {
+        var name = $('#new-name').val();
+        if (name == "") {
+            toast.show("请输入联系人姓名 :D");
+        } else {
+            document.edit_form.submit();
+        }
+
+
+    });
+});
+</script>
+{% endblock %} {% block body %}
+<div class="container">
+    <div class="add">
+        <div class="add-screen form-screen">
+            <div class="add-form">
+                <form method="POST" name="edit_form" action="/edit/{{ id }}">
+                    {{ form.csrf_token }}
+                    <h1 class="form-title">编辑联系人：</h1>
+                    <div class="control-group">
+                        <label class="username-label desc" for="add-name">name:</label>
+                        <!-- <input type="text" class="add-field" value="" placeholder="name" id="add-name"> -->
+                        {{ form.name(class="add-field", placeholder="name", id="new-name") }}
+                    </div>
+                    <div class="control-group">
+                        <label class="add-field-icon fui-lock" for="add-pass">phone:</label>
+                        <!-- <input type="password" class="add-field" value="" placeholder="phone" id="add-pass"> -->
+                        {{ form.phone(class="add-field", placeholder="phone", id="new-phone") }}
+                    </div>
+                    <div class="control-group">
+                        <label class="username-label desc" for="add-name">email:</label>
+                        <!-- <input type="text" class="add-field" value="" placeholder="email" id="add-name"> -->
+                        {{ form.email(class="add-field", placeholder="email", id="new-email") }}
+                    </div>
+                    <div class="control-group">
+                        <label class="add-field-icon fui-lock" for="add-pass">QQ:</label>
+                        <!-- <input type="password" class="add-field" value="" placeholder="QQ number" id="add-pass"> -->
+                        {{ form.qq(class="add-field", placeholder="qq", id="new-qq") }}
+                    </div>
+                    <div class="control-group">
+                        <label class="username-label desc" for="add-name">address:</label>
+                        <!-- <input type="text" class="add-field" value="" placeholder="address" id="add-name"> -->
+                        {{ form.address(class="add-field", placeholder="address", id="new-address") }}
+                    </div>
+                    <div class="btn" id="btn-toast" href="#">Edit the contact</div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
